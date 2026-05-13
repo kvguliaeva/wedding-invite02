@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Анна & Иван · Наша свадьба</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Marck+Script&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /*
+        НАСТРОЙКИ ФОТО:
+        Чтобы заменить фотографии, поменяй ссылки в --photo-main, --photo-second и --photo-bg.
+      */
+      --photo-main: url("https://images.unsplash.com/photo-1776267772345-f84b533ba7a5?q=82&w=1100&auto=format&fit=crop");
+      --photo-second: url("https://images.unsplash.com/photo-1764900125823-2b84280c69b7?q=82&w=1200&auto=format&fit=crop");
+      --photo-bg: url("https://images.unsplash.com/photo-1764900125823-2b84280c69b7?q=80&w=2200&auto=format&fit=crop");
+
+      --paper: #fffdf8;
+      --ink: #d9c7af;
+      --ink-strong: #c7ad8e;
+      --sand: #dac4a4;
+      --shadow: 0 28px 70px rgba(0, 0, 0, .38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #191919;
+      color: var(--ink);
+      font-family: "Cormorant Garamond", Georgia, serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(rgba(18, 18, 18, .26), rgba(18, 18, 18, .33)),
+        var(--photo-bg) center / cover no-repeat;
+      filter: grayscale(1) contrast(.96) brightness(.66);
+      transform: scale(1.04);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, .04), rgba(0, 0, 0, .35));
+      pointer-events: none;
+    }
+
+    main {
+      min-height: 100vh;
+      display: grid;
+      place-items: start center;
+      padding: clamp(34px, 6vw, 78px) 22px clamp(38px, 5vw, 52px);
+    }
+
+    .invite {
+      width: min(280px, 100%);
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .photo {
+      position: relative;
+      min-height: 520px;
+      background: var(--photo-main) center / cover no-repeat;
+    }
+
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 45%, rgba(33, 24, 17, .23));
+      pointer-events: none;
+    }
+
+    .hero-photo {
+      clip-path: polygon(0 0, 100% 0, 100% 91%, 93% 91%, 84% 95%, 73% 93%, 63% 97%, 52% 94%, 40% 97%, 28% 94%, 18% 96%, 9% 93%, 0 95%);
+    }
+
+    .hero-title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 62px;
+      z-index: 1;
+      color: #fffaf3;
+      text-align: center;
+      text-shadow: 0 2px 15px rgba(0, 0, 0, .48);
+    }
+
+    .arc {
+      width: 126px;
+      height: 35px;
+      margin: 0 auto -4px;
+      border-top: 1px solid rgba(255, 250, 243, .86);
+      border-radius: 50% 50% 0 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      line-height: 24px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Marck Script", cursive;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: .95;
+    }
+
+    .date-line {
+      margin: 10px 0 0;
+      font-size: 12px;
+      letter-spacing: .17em;
+    }
+
+    .section {
+      padding: 28px 21px;
+      text-align: center;
+    }
+
+    .section-tight { padding-top: 19px; }
+
+    .small-title {
+      margin: 0 0 13px;
+      color: var(--ink-strong);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-bottom: 22px;
+    }
+
+    .countdown strong {
+      display: block;
+      color: var(--ink-strong);
+      font-size: 27px;
+      font-weight: 400;
+      line-height: .95;
+    }
+
+    .countdown span {
+      display: block;
+      margin-top: 4px;
+      font-size: 9px;
+      line-height: 1;
+      text-transform: lowercase;
+    }
+
+    p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.34;
+    }
+
+    .invite-copy {
+      width: 144px;
+      margin: 0 auto 14px;
+    }
+
+    .calendar-mini {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 9px;
+      width: 166px;
+      margin: 0 auto 25px;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+
+    .calendar-mini::before,
+    .calendar-mini::after {
+      content: "";
+      height: 1px;
+      background: rgba(210, 190, 164, .72);
+    }
+
+    .calendar-mini b {
+      color: var(--ink-strong);
+      font-size: 27px;
+      font-weight: 400;
+      line-height: .85;
+    }
+
+    .block {
+      margin-top: 26px;
+    }
+
+    .icon {
+      width: 35px;
+      height: 35px;
+      margin: 0 auto 9px;
+      opacity: .68;
+    }
+
+    .icon.small {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 7px;
+    }
+
+    .icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      stroke: var(--ink);
+      stroke-width: 1.35;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      color: var(--ink-strong);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 112px;
+      min-height: 25px;
+      margin-top: 11px;
+      padding: 0 15px;
+      border-radius: 999px;
+      background: var(--sand);
+      color: #fffaf2;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .torn-photo {
+      height: 336px;
+      background: var(--photo-second) center / cover no-repeat;
+      clip-path: polygon(0 8%, 10% 4%, 22% 8%, 34% 3%, 47% 8%, 58% 5%, 70% 8%, 81% 3%, 92% 8%, 100% 5%, 100% 91%, 91% 88%, 82% 94%, 70% 90%, 60% 95%, 48% 90%, 37% 94%, 25% 89%, 13% 93%, 0 88%);
+    }
+
+    .map-card {
+      width: calc(100% + 16px);
+      height: 230px;
+      margin: 14px -8px 0;
+      padding: 8px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .62);
+    }
+
+    .map-card ymaps,
+    .map-card iframe {
+      border-radius: 7px;
+    }
+
+    .schedule {
+      position: relative;
+      padding-top: 69px;
+    }
+
+    .schedule::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 58px;
+      background: var(--photo-main) center 18% / cover no-repeat;
+      clip-path: polygon(0 0, 100% 0, 100% 31%, 93% 22%, 86% 38%, 75% 20%, 66% 44%, 58% 25%, 46% 37%, 36% 18%, 27% 40%, 18% 24%, 9% 35%, 0 18%);
+      filter: saturate(.84) contrast(1.04);
+    }
+
+    .event {
+      margin: 0 auto 34px;
+    }
+
+    .event time {
+      display: block;
+      color: var(--ink-strong);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .event span {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      line-height: 1.05;
+    }
+
+    .social {
+      padding-bottom: 9px;
+    }
+
+    .playlist {
+      margin-top: 32px;
+    }
+
+    .playlist-form {
+      width: calc(100% + 18px);
+      margin: 14px -9px 0;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .5);
+    }
+
+    .playlist-form iframe {
+      display: block;
+      width: 100%;
+      min-height: 430px;
+      border: 0;
+      background: transparent;
+    }
+
+    .final-photo {
+      height: 210px;
+      margin-top: 16px;
+      background: var(--photo-main) center 72% / cover no-repeat;
+      clip-path: polygon(0 18%, 10% 14%, 22% 18%, 34% 12%, 47% 17%, 59% 12%, 70% 17%, 81% 12%, 93% 17%, 100% 14%, 100% 100%, 0 100%);
+    }
+
+    @media (min-width: 760px) {
+      main {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+
+      .invite {
+        width: 330px;
+      }
+
+      .photo {
+        min-height: 610px;
+      }
+
+      .section {
+        padding: 34px 34px;
+      }
+
+      .arc {
+        width: 150px;
+        height: 39px;
+        font-size: 12px;
+        line-height: 27px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .date-line {
+        font-size: 14px;
+      }
+
+      .small-title {
+        font-size: 19px;
+      }
+
+      .countdown strong {
+        font-size: 34px;
+      }
+
+      .countdown span {
+        font-size: 11px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      .event time {
+        font-size: 16px;
+      }
+
+      .event span {
+        font-size: 15px;
+      }
+
+      .torn-photo {
+        height: 390px;
+      }
+
+      .final-photo {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      main { padding: 28px 16px 40px; }
+      .invite { width: min(292px, 100%); }
+      .photo { min-height: 520px; }
+      .torn-photo { height: 336px; }
+      .final-photo { height: 210px; }
+      .section { padding-left: 28px; padding-right: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div>
+      <article class="invite" aria-label="Свадебное приглашение Memories">
+        <section class="photo hero-photo">
+          <div class="hero-title">
+            <div class="arc">Наша свадьба</div>
+            <h1>Анна &amp; Иван</h1>
+            <p class="date-line">29.11.2026</p>
+          </div>
+        </section>
+
+        <section class="section section-tight">
+          <h2 class="small-title">Осталось:</h2>
+          <div class="countdown" data-countdown="2026-11-29T20:00:00">
+            <div><strong data-days>246</strong><span>дней</span></div>
+            <div><strong data-hours>11</strong><span>часов</span></div>
+            <div><strong data-minutes>59</strong><span>минут</span></div>
+            <div><strong data-seconds>46</strong><span>секунд</span></div>
+          </div>
+
+          <p class="invite-copy">Будем счастливы разделить с вами этот день</p>
+          <div class="calendar-mini"><span>Суббота</span><b>29</b><span>Ноябрь</span></div>
+
+          <section class="block">
+            <div class="icon">
+              <svg viewBox="0 0 48 48"><path d="M10 42h28M15 42V25l9-8 9 8v17M21 42V31h6v11M13 24l11-10 11 10M24 13v-4M20 9h8"/></svg>
+            </div>
+            <h2>Церемония</h2>
+            <p>21:30 - Храм Святой Екатерины,<br>Москва, улица Примерная, 12.</p>
+            <a class="button" href="#map">Как добраться</a>
+          </section>
+
+          <section class="block">
+            <div class="icon">
+              <svg viewBox="0 0 48 48"><path d="M17 8v17M31 8v17M14 8c0 8 1 13 3 17 2-4 3-9 3-17M28 8c0 8 1 13 3 17 2-4 3-9 3-17M17 25v15M31 25v15M13 40h8M27 40h8"/></svg>
+            </div>
+            <h2>Праздник</h2>
+            <p>22:00 - Банкетный зал Memories,<br>Москва, проспект Любви, 7.</p>
+            <a class="button" href="#map">Как добраться</a>
+          </section>
+        </section>
+
+        <section class="section" id="map">
+          <h2>Карта</h2>
+          <p>Откройте карту, чтобы построить маршрут до места праздника.</p>
+          <div class="map-card">
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A630e42c9cedc3ea75234ca761f4809bd70772c7a36baa0defeb0390fe7c59b45&amp;width=100%25&amp;height=214&amp;lang=ru_RU&amp;scroll=true"></script>
+          </div>
+        </section>
+
+        <section class="section schedule">
+          <section class="event">
+            <div class="icon small"><svg viewBox="0 0 48 48"><path d="M24 42s13-13 13-24a13 13 0 0 0-26 0c0 11 13 24 13 24Z"/><circle cx="24" cy="18" r="4"/></svg></div>
+            <time>20:00</time><span>Сбор гостей</span>
+          </section>
+          <section class="event">
+            <div class="icon small"><svg viewBox="0 0 48 48"><path d="M19 19c0-5 4-9 9-9s9 4 9 9-4 9-9 9M29 19c0-5-4-9-9-9s-9 4-9 9 4 9 9 9"/></svg></div>
+            <time>20:30</time><span>Церемония</span>
+          </section>
+          <section class="event">
+            <div class="icon small"><svg viewBox="0 0 48 48"><path d="M24 6v36M18 12h12M18 42h12M24 17c-7 3-9 8-7 14M24 17c7 3 9 8 7 14"/></svg></div>
+            <time>21:30</time><span>Тосты</span>
+          </section>
+          <section class="event">
+            <div class="icon small"><svg viewBox="0 0 48 48"><path d="M12 13h24v20H12zM9 13h30M15 33l-4 7M33 33l4 7M17 18h14M17 23h14"/></svg></div>
+            <time>22:00</time><span>Ужин</span>
+          </section>
+          <section class="event">
+            <div class="icon small"><svg viewBox="0 0 48 48"><path d="M11 24h26M24 11v26M15 15c6 5 12 5 18 0M15 33c6-5 12-5 18 0M15 15c-5 6-5 12 0 18M33 15c5 6 5 12 0 18"/></svg></div>
+            <time>00:00</time><span>Танцы</span>
+          </section>
+        </section>
+
+        <div class="torn-photo" aria-label="Фотография пары"></div>
+
+        <section class="section social">
+          <div class="icon">
+            <svg viewBox="0 0 48 48"><path d="M9 13h30v22H9zM13 17l11 9 11-9M17 11l4 6M31 11l-4 6"/></svg>
+          </div>
+          <h2>Instagram</h2>
+          <p>Нам будет очень приятно увидеть ваши фотографии. Отмечайте наш аккаунт и используйте хештег свадьбы.</p>
+          <a class="button" href="https://instagram.com" target="_blank" rel="noreferrer">#наша_свадьба</a>
+
+          <section class="playlist">
+            <div class="icon">
+              <svg viewBox="0 0 48 48"><path d="M18 12v22a5 5 0 1 1-3-5V12l20-4v20a5 5 0 1 1-3-5V8M34 18l5-2M12 11l-4-3M11 19H6"/></svg>
+            </div>
+            <h2>Плейлист</h2>
+            <p>Помогите нам собрать музыку вечера. Пришлите песню, без которой праздник не будет полным.</p>
+            <div class="playlist-form">
+              <script src="https://forms.yandex.ru/_static/embed.js"></script>
+              <iframe src="https://forms.yandex.ru/u/6a042b346d2d7337084df5a2?iframe=1" name="ya-form-6a042b346d2d7337084df5a2" title="Форма для плейлиста"></iframe>
+            </div>
+          </section>
+        </section>
+
+        <div class="final-photo" aria-hidden="true"></div>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    const countdown = document.querySelector("[data-countdown]");
+    const target = new Date(countdown.dataset.countdown).getTime();
+    const parts = {
+      days: countdown.querySelector("[data-days]"),
+      hours: countdown.querySelector("[data-hours]"),
+      minutes: countdown.querySelector("[data-minutes]"),
+      seconds: countdown.querySelector("[data-seconds]")
+    };
+
+    function updateCountdown() {
+      const distance = Math.max(target - Date.now(), 0);
+      parts.days.textContent = String(Math.floor(distance / 86400000));
+      parts.hours.textContent = String(Math.floor(distance / 3600000) % 24).padStart(2, "0");
+      parts.minutes.textContent = String(Math.floor(distance / 60000) % 60).padStart(2, "0");
+      parts.seconds.textContent = String(Math.floor(distance / 1000) % 60).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
